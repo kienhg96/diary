@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title>My Diary</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" type="text/css" href="/public/css/home.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/public/js/home.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div>
+				<label>Tiêu đề</label>
+				<input type="text" class="form-control" placeholder="Đặt một tiêu đề" required="" id="subject" maxlength="128" autocomplete="off">
+				<label>Nội dung</label>
+				<textarea class="form-control" rows="5" id="textContent"></textarea>
+				<button id="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Gửi</button>
+			</div>
+			<hr>
+			<div id="content">
+			</div>
+		</div>
+	</body>
+</html>
