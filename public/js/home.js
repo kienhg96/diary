@@ -32,7 +32,8 @@ $(document).ready(function(){
 	$("#submit").on('click', function(){
 		var subject = $("#subject").val();
 		var contentText = $("#textContent").val();
-
+		$("#subject").val("");
+		$("#textContent").val("");
 		$.post(window.location.origin + '/post', 
 		{
 			'action' : 'post',
