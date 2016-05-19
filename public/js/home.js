@@ -15,13 +15,19 @@ function deletepost(){
 	$(this).parent().hide('slow', function(){
 		$(this).remove();
 	});
+	var parent = $(this).parent();
 	$.post(window.location.origin + '/post',
 	{
 		'action' : 'delete',
 		'id' : $(this).attr('value')
 	},
 	function(data, status){
-		console.log(status);
+		//console.log(status);
+		if (status=== "success"){
+			parent.hide('slow', function(){
+				$(this).remove();
+			});
+		}
 	});
 }
 
