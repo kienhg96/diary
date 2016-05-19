@@ -2,7 +2,7 @@ function generateContent(no, title, content, id, style){
 	return '<div class="well" id="'+id+'" ' + style +'><h3 class="title">#' + no + ' ' + title +'</h3><hr><p class="para">'+ content + '</p><button class="btn btn-danger btndelete" type="submit" name="delete" value="'+ id +'"><i class="fa fa-trash"></i> Xóa #' + no + '</button></div>';
 }
 var i = 1;
-
+var collapse = true;
 function deletepost(){
 	/*
 	$(this).parent().animate({
@@ -45,9 +45,32 @@ $(document).ready(function(){
 		});
 		$(".btndelete").on('click', deletepost);
 	});
+
+	$("#subject").on('click', function(){
+		if (collapse){
+			$(this).animate({
+				'width': '100%'
+			});
+			$("#boxContent").show('normal');
+			collapse = false;
+		}
+	});
+
+	$("#collapse").on('click', function(){
+		$("#subject").animate({
+			'width': '200px'
+		}, function(){
+		});
+		$("#boxContent").hide('normal');
+		collapse = true;
+	});
+
 	$("#submit").on('click', function(){
 		var subject = $("#subject").val();
 		var contentText = $("#textContent").val();
+		var date = new Date();
+		var datestr = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getHours() + ":" +date.getMinutes();
+		console.log(datestr);
 		$("#subject").val("");
 		$("#textContent").val("");
 		$("#submit").prop('disabled', true);

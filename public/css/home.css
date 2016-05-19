@@ -17,6 +17,21 @@ hr {
 	margin-top: 5px;
 
 }
+#subject {
+	width: 200px;
+}
+#boxContent{
+	display: none;
+}
+#collapse{
+	background-color: rgb(161, 230, 122);
+	float: right;
+	margin-top: 5px;
+	width: 40px;
+}
+#textContent {
+	resize: vertical;
+}
 .title {
     font-family: Lobster, Monospace;
 }
@@ -24,4 +39,9 @@ hr {
 .para {
 	
 	font-size: 16px;
+}
+.time {
+	color: rgb(100, 100, 100);
+	font-size: 12px;
+	font-family: Arial;
 }

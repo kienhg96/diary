@@ -13,14 +13,25 @@
 	<body>
 		<div class="container">
 			<div>
-				<label>Tiêu đề</label>
+				<label>Viết gì đó</label>
 				<input type="text" class="form-control" placeholder="Đặt một tiêu đề" required="" id="subject" maxlength="128" autocomplete="off">
-				<label>Nội dung</label>
-				<textarea class="form-control" rows="5" id="textContent"></textarea>
-				<button id="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Gửi</button>
+				<div id="boxContent">
+					<label>Nội dung</label>
+					<textarea class="form-control" rows="5" id="textContent" placeholder="Hãy viết gì đó..."></textarea>
+					<button id="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Gửi</button>
+					<button id="collapse" class="btn">^</button>
+				</div>
 			</div>
 			<hr>
-			<div id="content"></div>
+			<div id="content">
+				<div class="well" id="573df8cfe1c621a01adf40ff">
+					<h3 class="title">#0 Time</h3>
+					<span class="time">0<b>:</b>23 20-05-2016</span>
+					<hr>
+					<p class="para">Content</p>
+					<button class="btn btn-danger btndelete" type="submit" name="delete" value="573df8cfe1c621a01adf40ff"><i class="fa fa-trash"></i> Xóa #2</button>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>
