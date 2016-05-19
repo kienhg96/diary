@@ -1,5 +1,5 @@
 function generateContent(no, title, content, id, style){
-	return '<div class="well" id="'+id+'" style="' + style +'"><h3 class="title">#' + no + ' ' + title +'</h3><hr><p class="para">'+ content + '</p><button class="btn btn-danger btndelete" type="submit" name="delete" value="'+ id +'"><i class="fa fa-trash"></i> Xóa #' + no + '</button></div>';
+	return '<div class="well" id="'+id+'" ' + style +'><h3 class="title">#' + no + ' ' + title +'</h3><hr><p class="para">'+ content + '</p><button class="btn btn-danger btndelete" type="submit" name="delete" value="'+ id +'"><i class="fa fa-trash"></i> Xóa #' + no + '</button></div>';
 }
 var i = 1;
 
@@ -52,7 +52,7 @@ $(document).ready(function(){
 		}, 
 		function(data, status){
 			if (status=== "success"){
-				var html = generateContent(i, subject, contentText, data, "display: none;");
+				var html = generateContent(i, subject, contentText, data, 'style="display: none;"');
 				$("#content").prepend(html);
 				i++;
 				$(".btndelete").on('click', deletepost);
