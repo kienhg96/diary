@@ -50,6 +50,8 @@ $(document).ready(function(){
 		var contentText = $("#textContent").val();
 		$("#subject").val("");
 		$("#textContent").val("");
+		$("#submit").prop('disabled', true);
+		$("#submit").html('<i class="fa fa-paper-plane"></i> Đang gửi...');
 		$.post(window.location.origin + '/post', 
 		{
 			'action' : 'post',
@@ -64,6 +66,8 @@ $(document).ready(function(){
 				$(".btndelete").on('click', deletepost);
 				$( "#" + data ).show( "slow", function() {
     				// Animation complete.
+    				$("#submit").html('<i class="fa fa-paper-plane"></i> Gửi');
+    				$("#submit").prop('disabled', false);
   				});
 			}
 		});
