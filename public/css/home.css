@@ -2,12 +2,16 @@ body {
 	background-color: rgb(230,230,230);
 	margin-top: 15px;
 }
+
 label {
 	margin-top: 5px; 
 	margin-bottom: 5px;
 }
 hr {
     border-top: 2px solid rgb(200,200,200);
+}
+.well {
+	min-height: 0px !important;
 }
 #submit {
 	margin-top: 5px;
@@ -16,6 +20,7 @@ hr {
 .title {
     font-family: Lobster, Monospace;
 }
+
 .para {
 	
 	font-size: 16px;
