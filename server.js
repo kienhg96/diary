@@ -24,7 +24,8 @@ app.post('/post', function(req, res){
 					var j = {
 						'id' : doc._id,
 						'title' : doc.title,
-						'content' : doc.content
+						'content' : doc.content,
+						'date' : doc.date
 					};
 					arr.push(j);
 				});
@@ -34,17 +35,15 @@ app.post('/post', function(req, res){
 		});
 	}
 	else if (req.body.action === 'post'){
-		var j = {
-			'title' : req.body.title,
-			'content' : req.body.content
-		};
 		mongo.connect('mongodb://127.0.0.1:27017/diary',function(err, db){
 			if (err) throw err;
+			//console.log(req.body.date);
 			var collection = db.collection('mypost');
 			collection.insert(
 			{
 			'title' : req.body.title,
-			'content' : req.body.content
+			'content' : req.body.content,
+			'date' : req.body.date
 			}, function(err, data){
 				if (err) throw err;
 				res.send(data.insertedIds[0]);
