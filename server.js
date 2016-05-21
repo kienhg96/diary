@@ -63,6 +63,38 @@ app.post('/post', function(req, res){
 			});
 		});
 	} 
+	else if (req.body.action === 'sendCmt'){
+		mongo.connect('mongodb://127.0.0.1:27017/diary', function(err, db){
+			if (err) throw err;
+			var collection = db.collection('cmtmsg');
+			collection.insert({
+				'postid': req.body.id,
+				'msg': req.body.msg,
+				'date': req.body.date
+			}, function(err, data){
+				if (err) throw err;
+				res.end();
+				db.close();
+			});
+		});
+	} 
+	else if (req.body.action === 'getCmt'){
+		mongo.connect('mongodb://127.0.0.1:27017/diary', function(err, db){
+			if (err) throw err;
+			var collection = db.collection('cmtmsg');
+			collection.find({'postid' : req.body.id}).toArray(function(err, data){
+				var arr = [];
+				data.forEach(function(elem){
+					arr.push({
+						'msg': elem.msg,
+						'date': elem.date
+					});
+				});
+				res.json(arr);
+				db.close();
+			});
+		});
+	}
 	else {
 		res.end();
 	}
