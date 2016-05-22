@@ -121,9 +121,7 @@ $(document).ready(function(){
 				timezonestr = " UTC +" - timezonestr;
 			}
 			datestr += timezonestr
-			console.log(datestr);
-			$("#subject").val("");
-			$("#textContent").val("");
+			//console.log(datestr);
 			$("#submit").prop('disabled', true);
 			$("#submit").html('<i class="fa fa-paper-plane"></i> Đang gửi...');
 			$.post(window.location.origin + '/post', 
@@ -144,6 +142,8 @@ $(document).ready(function(){
 	    				$("#submit").html('<i class="fa fa-paper-plane"></i> Gửi');
 	    				$("#submit").prop('disabled', false);
 	  				});
+	  				$("#subject").val("");
+					$("#textContent").val("");
 	  				updateEvent();
 				}
 			});
@@ -154,13 +154,18 @@ $(document).ready(function(){
 	});
 	function btncomment() {
 		$(".btncomment").on('click', function(){
+
 			var cmt = $(this).parent().find('.commentarea');
 			if (cmt.css('display') === 'none'){
 				// Load comment
 				//console.log($(this).parent().find('.commentarea').find('cmtmsg').html());
 				var cmtmsg = $(this).parent().find('.commentarea').find('.cmtmsg');
 				var parent = $(this).parent();
+				var thisbtn = $(this);
 				if (cmtmsg.html() === ''){
+					thisbtn.html('<i class="fa fa-comment"></i> Đang tải...');
+					thisbtn.prop('disabled', true);
+					
 					getCmt($(this).val(), function(data, status){
 						data.forEach(function(elem){
 							//console.log(makeCmt(elem.date, elem.msg));
@@ -168,6 +173,9 @@ $(document).ready(function(){
 						});
 						cmt.show('normal');
 						parent.find('.cmtcollapse').show('normal');
+						//console.log('done');
+						thisbtn.prop('disabled', false);
+						thisbtn.html('<i class="fa fa-comment"></i> Bình luận');
 					});
 				}
 				else {
@@ -181,7 +189,10 @@ $(document).ready(function(){
 				// Send comment to server
 				var msg = parent.find('.commentarea').find('.cmtbox').val();
 				if (msg != ''){
+					$(this).prop('disabled', true);
+					$(this).html('<i class="fa fa-comment"></i> Đang gửi...');
 					var datestr = getDateString();
+					var thisbtn = $(this);
 					sendCmt($(this).val(), msg, datestr ,function(data, status){
 						if (status === 'success'){
 							var str = '<h6 style="display: none;"><span class="date">'+ datestr +'</span> : ' + msg +'</h6>';
@@ -189,6 +200,8 @@ $(document).ready(function(){
 							parent.find('.commentarea').find('.cmtbox').val('');
 							parent.find('.commentarea').find('.cmtmsg').append(str);
 							parent.find('.commentarea').find('.cmtmsg').find('h6').show('fast');
+							thisbtn.prop('disabled', false);
+							thisbtn.html('<i class="fa fa-comment"></i> Bình luận');
 						}
 					})
 				}
@@ -208,6 +221,9 @@ $(document).ready(function(){
 			if (e.keyCode == 13){
 				var cmtbox = $(this);
 				var msg = cmtbox.val();
+				var thisbtn = $(this).parent().parent().find('.btncomment');
+				thisbtn.prop('disabled', true);
+				thisbtn.html('<i class="fa fa-comment"></i> Đang gửi...');
 				// Send comment to server
 				var datestr = getDateString();
 				sendCmt(cmtbox.parent().parent().attr('id'), msg, datestr,function(data, status){
@@ -217,6 +233,8 @@ $(document).ready(function(){
 						cmtbox.val('');
 						cmtbox.parent().find('.cmtmsg').append(str);
 						cmtbox.parent().find('.cmtmsg').find('h6').show('fast');
+						thisbtn.prop('disabled', false);
+						thisbtn.html('<i class="fa fa-comment"></i> Bình luận');
 					}
 				});
 			}
