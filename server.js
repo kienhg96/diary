@@ -11,11 +11,13 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname, 'html/home.html'));
 });
+ 
+var dbport = '11913';
 
 app.post('/post', function(req, res){
 	if (req.body.action === 'getContent'){
 		//res.json([{'title' : 'First', 'content' : 'No content'}, {'title' : 'Second', 'content' : "It's Me"}]);
-		mongo.connect('mongodb://127.0.0.1:27017/diary',function(err, db){
+		mongo.connect('mongodb://127.0.0.1:'+ dbport +'/diary',function(err, db){
 			if (err) throw err;
 			var collection = db.collection('mypost');
 			collection.find().toArray(function(err, data){
@@ -35,7 +37,7 @@ app.post('/post', function(req, res){
 		});
 	}
 	else if (req.body.action === 'post'){
-		mongo.connect('mongodb://127.0.0.1:27017/diary',function(err, db){
+		mongo.connect('mongodb://127.0.0.1:'+dbport+'/diary',function(err, db){
 			if (err) throw err;
 			//console.log(req.body.date);
 			var collection = db.collection('mypost');
@@ -52,7 +54,7 @@ app.post('/post', function(req, res){
 		});
 	}
 	else if (req.body.action === 'delete'){
-		mongo.connect('mongodb://127.0.0.1:27017/diary', function(err, db){
+		mongo.connect('mongodb://127.0.0.1:'+dbport+'/diary', function(err, db){
 			if (err) throw err;
 			var collection = db.collection('mypost');
 			collection.remove({ '_id': ObjectID(req.body.id)}, function(err, result){
@@ -68,7 +70,7 @@ app.post('/post', function(req, res){
 		});
 	} 
 	else if (req.body.action === 'sendCmt'){
-		mongo.connect('mongodb://127.0.0.1:27017/diary', function(err, db){
+		mongo.connect('mongodb://127.0.0.1:'+dbport+'/diary', function(err, db){
 			if (err) throw err;
 			var collection = db.collection('cmtmsg');
 			collection.insert({
@@ -83,7 +85,7 @@ app.post('/post', function(req, res){
 		});
 	} 
 	else if (req.body.action === 'getCmt'){
-		mongo.connect('mongodb://127.0.0.1:27017/diary', function(err, db){
+		mongo.connect('mongodb://127.0.0.1:'+dbport+'/diary', function(err, db){
 			if (err) throw err;
 			var collection = db.collection('cmtmsg');
 			collection.find({'postid' : req.body.id}).toArray(function(err, data){
