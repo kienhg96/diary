@@ -13,7 +13,7 @@ app.get('/', function(req, res){
 });
  
 var dbaddr = "mongodb://admin:maiyeuem0@ds011873.mlab.com:11873/kienhg96";
-
+//var dbaddr = "mongodb://127.0.0.1:27017/diary";
 app.post('/post', function(req, res){
 	if (req.body.action === 'getContent'){
 		//res.json([{'title' : 'First', 'content' : 'No content'}, {'title' : 'Second', 'content' : "It's Me"}]);

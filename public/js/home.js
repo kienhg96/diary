@@ -36,6 +36,8 @@ function deletepost(){
 		$(this).remove();
 	});*/
 	var parent = $(this).parent();
+	$(this).html('<i class="fa fa-trash"></i> Đang xóa...');
+	$(this).prop('disabled', true);
 	$.post(window.location.origin + '/post',
 	{
 		'action' : 'delete',
