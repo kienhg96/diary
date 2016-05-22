@@ -104,6 +104,7 @@ app.post('/post', function(req, res){
 	}
 });
 
-app.listen(process.argv[2] || 8080 , function(){
-	console.log('Server is listening on port ' + process.argv[2]);
+var port = process.env.PORT || 8080;
+app.listen(port,  function () {
+	console.log('Node.js listening on port ' + port + '...');
 });
