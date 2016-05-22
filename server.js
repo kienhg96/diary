@@ -59,13 +59,9 @@ app.post('/post', function(req, res){
 			var collection = db.collection('mypost');
 			collection.remove({ '_id': ObjectID(req.body.id)}, function(err, result){
 				if (err) throw err;
-				var comment = db.collection('cmtmsg');
-				//console.log(req.body.id);
-				comment.remove({'postid': req.body.id}, function(err, result){
-					if (err) throw err;
-					res.end();
-					db.close();
-				});
+				//console.log(result);
+				res.end();
+				db.close();
 			});
 		});
 	} 
