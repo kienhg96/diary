@@ -12,7 +12,7 @@ app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname, 'html/home.html'));
 });
  
-var dbaddr = "mongodb://admin:maiyeuem0@ds011913.mlab.com:11913/heroku_b970vcbm";
+var dbaddr = "mongodb://admin:maiyeuem0@ds011873.mlab.com:11873/kienhg96";
 
 app.post('/post', function(req, res){
 	if (req.body.action === 'getContent'){
