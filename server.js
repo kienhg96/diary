@@ -12,8 +12,8 @@ app.get('/', function(req, res){
 	res.sendFile(path.join(__dirname, 'html/home.html'));
 });
  
-var dbaddr = "mongodb://admin:maiyeuem0@ds011873.mlab.com:11873/kienhg96";
-//var dbaddr = "mongodb://127.0.0.1:27017/diary";
+//var dbaddr = "mongodb://admin:maiyeuem0@ds011873.mlab.com:11873/kienhg96";
+var dbaddr = "mongodb://127.0.0.1:27017/diary";
 app.post('/post', function(req, res){
 	if (req.body.action === 'getContent'){
 		//res.json([{'title' : 'First', 'content' : 'No content'}, {'title' : 'Second', 'content' : "It's Me"}]);
@@ -59,9 +59,11 @@ app.post('/post', function(req, res){
 			var collection = db.collection('mypost');
 			collection.remove({ '_id': ObjectID(req.body.id)}, function(err, result){
 				if (err) throw err;
-				//console.log(result);
-				res.end();
-				db.close();
+				collection = db.collection('cmtmsg');
+				collection.remove({'postid': req.body.id}, function(err, result){
+					res.end();
+					db.close();
+				});
 			});
 		});
 	} 
