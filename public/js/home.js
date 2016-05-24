@@ -35,8 +35,9 @@ function deletepost(){
 	}, function(){
 		$(this).remove();
 	});*/
+
 	var parent = $(this).parent();
-	$(this).html('<i class="fa fa-trash"></i> Đang xóa...');
+	$(this).html('<img id="imgbtnloading" src="public/gif/loading.gif"></i> Đang xóa...');
 	$(this).prop('disabled', true);
 	$.post(window.location.origin + '/post',
 	{
@@ -82,6 +83,8 @@ $(document).ready(function(){
 		});
 		$(".btndelete").on('click', deletepost);
 		updateEvent();
+		$('#loading').hide('slow');
+		$('#content').show('slow');
 	});
 
 	$("#subject").on('click', function(){
@@ -125,7 +128,7 @@ $(document).ready(function(){
 			datestr += timezonestr
 			//console.log(datestr);
 			$("#submit").prop('disabled', true);
-			$("#submit").html('<i class="fa fa-paper-plane"></i> Đang gửi...');
+			$("#submit").html('<img id="imgbtnloading" src="public/gif/loading.gif"></i> Đang gửi...');
 			$.post(window.location.origin + '/post', 
 			{
 				'action' : 'post',
@@ -156,7 +159,6 @@ $(document).ready(function(){
 	});
 	function btncomment() {
 		$(".btncomment").on('click', function(){
-
 			var cmt = $(this).parent().find('.commentarea');
 			if (cmt.css('display') === 'none'){
 				// Load comment
@@ -165,7 +167,7 @@ $(document).ready(function(){
 				var parent = $(this).parent();
 				var thisbtn = $(this);
 				if (cmtmsg.html() === ''){
-					thisbtn.html('<i class="fa fa-comment"></i> Đang tải...');
+					thisbtn.html('<img id="imgbtnloading" src="public/gif/loading.gif"></i> Đang tải...');
 					thisbtn.prop('disabled', true);
 					
 					getCmt($(this).val(), function(data, status){
@@ -192,7 +194,7 @@ $(document).ready(function(){
 				var msg = parent.find('.commentarea').find('.cmtbox').val();
 				if (msg != ''){
 					$(this).prop('disabled', true);
-					$(this).html('<i class="fa fa-comment"></i> Đang gửi...');
+					$(this).html('<img id="imgbtnloading" src="public/gif/loading.gif"></i> Đang gửi...');
 					var datestr = getDateString();
 					var thisbtn = $(this);
 					sendCmt($(this).val(), msg, datestr ,function(data, status){
@@ -225,7 +227,7 @@ $(document).ready(function(){
 				var msg = cmtbox.val();
 				var thisbtn = $(this).parent().parent().find('.btncomment');
 				thisbtn.prop('disabled', true);
-				thisbtn.html('<i class="fa fa-comment"></i> Đang gửi...');
+				thisbtn.html('<img id="imgbtnloading" src="public/gif/loading.gif"></i> Đang gửi...');
 				// Send comment to server
 				var datestr = getDateString();
 				sendCmt(cmtbox.parent().parent().attr('id'), msg, datestr,function(data, status){
