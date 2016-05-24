@@ -1,5 +1,5 @@
 body {
-	background-color: rgb(230,230,230);
+	background-color: rgb(220,224,227);
 	margin-top: 15px;
 }
 
@@ -8,8 +8,18 @@ label {
 	margin-bottom: 5px;
 }
 
+.shadow {
+	box-shadow: 0px 0px 25px rgba(200, 200, 200, 10);
+}
+.secondhr{
+	border-top: 2px solid rgb(230,230,230);
+}
 hr {
 	border-top: 2px solid rgb(200,200,200);
+}
+
+.well {
+	background-color: rgb(250,250,250);
 }
 
 .well > hr {
@@ -50,7 +60,7 @@ hr {
 	display: none;
 }
 #collapse{
-	background-color: rgb(161, 230, 122);
+	background-color: rgb(150, 230, 120);
 	float: right;
 	margin-top: 5px;
 	width: 40px;
@@ -59,7 +69,8 @@ hr {
 	background-color: rgb(49, 187, 0);
 }
 #textContent {
-	resize: vertical;
+	resize: none;
+	overflow:hidden
 }
 .commentarea{
 	display: none;
@@ -83,6 +94,7 @@ hr {
 	font-size: 16px;
 	margin-bottom: 10px;
 	margin-top: 10px;
+	word-wrap: break-word;
 }
 .time {
 	color: rgb(100, 100, 100);

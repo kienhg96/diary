@@ -1,10 +1,11 @@
 var sendding = false;
 var loaded = {};
+
 function generateContent(no, title, date, content, id, style = ""){
-	return '<div class="well" id="'+id+'" ' + style +'>' + 
+	return '<div class="well shadow" id="'+id+'" ' + style +'>' + 
 				'<h3 class="title">#' + no + ' ' + title +'</h3>' +
 				'<span class="time">&#x1f550; '+ date +'</span><hr>' +
-				'<p class="para">'+ content + '</p><hr>' + 
+				'<p class="para">'+ content + '</p><hr class="secondhr">' + 
 				'<div class="commentarea">' +
 					'<div class="cmtmsg">' + 
 					'</div>' +
@@ -71,7 +72,23 @@ function getCmt(id, callback){
 	}, callback);
 }
 
+
 $(document).ready(function(){
+
+	var textarea = document.querySelector('textarea');
+	textarea.addEventListener('keydown', autosize);
+             
+	function autosize(){
+	  var el = this;
+	  el
+	  setTimeout(function(){
+	    el.style.cssText = 'height:auto; padding:0';
+	    // for box-sizing other than "content-box" use:
+	    // el.style.cssText = '-moz-box-sizing:content-box';
+	    el.style.cssText = 'height:' + (el.scrollHeight + 15)+ 'px';
+	  },0);
+}
+
 	$.post(window.location.origin + '/post',
 	{
 		'action' : 'getContent'
@@ -89,6 +106,8 @@ $(document).ready(function(){
 		$('#loading').hide('slow');
 		$('#content').show('slow');
 	});
+	
+	// Auto expand
 
 	$("#subject").on('click', function(){
 		if (collapse){
