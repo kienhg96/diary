@@ -7,10 +7,6 @@ label {
 	margin-top: 5px; 
 	margin-bottom: 5px;
 }
-
-.shadow {
-	box-shadow: 0px 0px 25px rgba(200, 200, 200, 10);
-}
 .secondhr{
 	border-top: 2px solid rgb(230,230,230);
 }

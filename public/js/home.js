@@ -2,7 +2,7 @@ var sendding = false;
 var loaded = {};
 
 function generateContent(no, title, date, content, id, style = ""){
-	return '<div class="well shadow" id="'+id+'" ' + style +'>' + 
+	return '<div class="well" id="'+id+'" ' + style +'>' + 
 				'<h3 class="title">#' + no + ' ' + title +'</h3>' +
 				'<span class="time">&#x1f550; '+ date +'</span><hr>' +
 				'<p class="para">'+ content + '</p><hr class="secondhr">' + 
