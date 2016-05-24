@@ -1,6 +1,6 @@
 var sendding = false;
 var loaded = {};
-function generateContent(no, title, date, content, id, style){
+function generateContent(no, title, date, content, id, style = ""){
 	return '<div class="well" id="'+id+'" ' + style +'>' + 
 				'<h3 class="title">#' + no + ' ' + title +'</h3>' +
 				'<span class="time">&#x1f550; '+ date +'</span><hr>' +
@@ -80,7 +80,7 @@ $(document).ready(function(){
 		//console.log(data);
 		data.forEach(function(elem){
 			loaded[elem.id] = false;
-			var html = generateContent(i, elem.title, elem.date , elem.content, elem.id, "");
+			var html = generateContent(i, elem.title, elem.date , elem.content, elem.id);
 			$("#content").prepend(html);
 			i++;
 		});
@@ -142,6 +142,7 @@ $(document).ready(function(){
 			function(data, status){
 				if (status=== "success"){
 					var html = generateContent(i, subject, datestr ,contentText, data, 'style="display: none;"');
+					loaded[data] = true;
 					$("#content").prepend(html);
 					i++;
 					$(".btndelete").on('click', deletepost);
