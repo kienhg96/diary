@@ -14,6 +14,5 @@ diary(app);
 
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {
-	console.log(process.env.MONGO_URI);
 	console.log('Node.js listening on port ' + port + '...');
 });
