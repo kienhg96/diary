@@ -1,3 +1,4 @@
+var sendding = false;
 function generateContent(no, title, date, content, id, style){
 	return '<div class="well" id="'+id+'" ' + style +'>' + 
 				'<h3 class="title">#' + no + ' ' + title +'</h3>' +
@@ -159,55 +160,59 @@ $(document).ready(function(){
 	});
 	function btncomment() {
 		$(".btncomment").on('click', function(){
-			var cmt = $(this).parent().find('.commentarea');
-			if (cmt.css('display') === 'none'){
-				// Load comment
-				//console.log($(this).parent().find('.commentarea').find('cmtmsg').html());
-				var cmtmsg = $(this).parent().find('.commentarea').find('.cmtmsg');
-				var parent = $(this).parent();
-				var thisbtn = $(this);
-				if (cmtmsg.html() === ''){
-					thisbtn.html('<img id="imgbtnloading" src="public/gif/loading.gif"></i> Đang tải...');
-					thisbtn.prop('disabled', true);
-					
-					getCmt($(this).val(), function(data, status){
-						data.forEach(function(elem){
-							//console.log(makeCmt(elem.date, elem.msg));
-							cmtmsg.append(makeCmt(elem.date, elem.msg));
-						});
-						cmt.show('normal');
-						parent.find('.cmtcollapse').show('normal');
-						//console.log('done');
-						thisbtn.prop('disabled', false);
-						thisbtn.html('<i class="fa fa-comment"></i> Bình luận');
-					});
-				}
-				else {
-					cmt.show('normal');
-					parent.find('.cmtcollapse').show('normal');
-				}
-				// End loadcomment
-			}
-			else {
-				var parent = $(this).parent();
-				// Send comment to server
-				var msg = parent.find('.commentarea').find('.cmtbox').val();
-				if (msg != ''){
-					$(this).prop('disabled', true);
-					$(this).html('<img id="imgbtnloading" src="public/gif/loading.gif"></i> Đang gửi...');
-					var datestr = getDateString();
+			if (sendding == false){
+				sendding = true;
+				var cmt = $(this).parent().find('.commentarea');
+				if (cmt.css('display') === 'none'){
+					// Load comment
+					//console.log($(this).parent().find('.commentarea').find('cmtmsg').html());
+					var cmtmsg = $(this).parent().find('.commentarea').find('.cmtmsg');
+					var parent = $(this).parent();
 					var thisbtn = $(this);
-					sendCmt($(this).val(), msg, datestr ,function(data, status){
-						if (status === 'success'){
-							var str = '<h6 style="display: none;"><span class="date">'+ datestr +'</span> : ' + msg +'</h6>';
-							//console.log(str);
-							parent.find('.commentarea').find('.cmtbox').val('');
-							parent.find('.commentarea').find('.cmtmsg').append(str);
-							parent.find('.commentarea').find('.cmtmsg').find('h6').show('fast');
+					if (cmtmsg.html() === ''){
+						thisbtn.html('<img id="imgbtnloading" src="public/gif/loading.gif"></i> Đang tải...');
+						thisbtn.prop('disabled', true);
+						
+						getCmt($(this).val(), function(data, status){
+							data.forEach(function(elem){
+								//console.log(makeCmt(elem.date, elem.msg));
+								cmtmsg.append(makeCmt(elem.date, elem.msg));
+							});
+							cmt.show('normal');
+							parent.find('.cmtcollapse').show('normal');
+							//console.log('done');
 							thisbtn.prop('disabled', false);
 							thisbtn.html('<i class="fa fa-comment"></i> Bình luận');
-						}
-					})
+							sendding = false;
+						});
+					}
+					else {
+						cmt.show('normal');
+						parent.find('.cmtcollapse').show('normal');
+					}
+					// End loadcomment
+				}
+				else {
+					var parent = $(this).parent();
+					// Send comment to server
+					var msg = parent.find('.commentarea').find('.cmtbox').val();
+					if (msg != ''){
+						$(this).prop('disabled', true);
+						$(this).html('<img id="imgbtnloading" src="public/gif/loading.gif"></i> Đang gửi...');
+						var datestr = getDateString();
+						var thisbtn = $(this);
+						sendCmt($(this).val(), msg, datestr ,function(data, status){
+							if (status === 'success'){
+								var str = '<h6 style="display: none;"><span class="date">'+ datestr +'</span> : ' + msg +'</h6>';
+								//console.log(str);
+								parent.find('.commentarea').find('.cmtbox').val('');
+								parent.find('.commentarea').find('.cmtmsg').append(str);
+								parent.find('.commentarea').find('.cmtmsg').find('h6').show('fast');
+								thisbtn.prop('disabled', false);
+								thisbtn.html('<i class="fa fa-comment"></i> Bình luận');
+							}
+						})
+					}
 				}
 			}
 		});
